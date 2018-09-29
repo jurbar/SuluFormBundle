@@ -28,11 +28,17 @@ class MailchimpType implements FormFieldTypeInterface
     private $apiKey;
 
     /**
+     * @var int
+     */
+    private $listFetchLimit;
+
+    /**
      * @param string $apiKey
      */
-    public function __construct($apiKey)
+    public function __construct($apiKey, $listFetchLimit)
     {
         $this->apiKey = $apiKey;
+        $this->listFetchLimit = $listFetchLimit;
     }
 
     /**
@@ -80,7 +86,9 @@ class MailchimpType implements FormFieldTypeInterface
         }
 
         $mailChimp = new \DrewM\MailChimp\MailChimp($this->apiKey);
-        $response = $mailChimp->get('lists');
+        $response = $mailChimp->get('lists', ['count' => $this->listFetchLimit]);
+
+        dump($this->listFetchLimit);
 
         if (!isset($response['lists'])) {
             return $lists;

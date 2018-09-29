@@ -12,6 +12,7 @@
 
         <service id="sulu_form.dynamic.type_mailchimp" class="Sulu\Bundle\FormBundle\Dynamic\Types\MailchimpType">
             <argument>%sulu_form.mailchimp_api_key%</argument>
+            <argument>%ulu_form.mailchimp_list_fetch_limit%</argument>
             <tag name="sulu_form.dynamic.type" alias="mailchimp"/>
         </service>
     </services>
